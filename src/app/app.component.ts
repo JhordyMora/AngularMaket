@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-store-2';
+  title2: String = "Este es un texto en app component";
+  imageSrc: String = "Agrege la url de la imagen que quiera mostrar"//"https://www.w3schools.com/howto/img_avatar.png";
 }

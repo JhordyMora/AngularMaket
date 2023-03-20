@@ -1,0 +1,6 @@
+<p>{{ valor}}</p>
+<p *ngIf="image=='' || image=='Agrege la url de la imagen que quiera mostrar'; else elseBlock">No se ha renderizado ninguna Imagen. Por favor para algun link</p>
+<ng-template #elseBlock>
+    <img [src]="image" alt="Imagen">
+    
+</ng-template>
