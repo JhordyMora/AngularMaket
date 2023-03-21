@@ -1,6 +1,9 @@
-<p>{{ valor}}</p>
-<p *ngIf="image=='' || image=='Agrege la url de la imagen que quiera mostrar'; else elseBlock">No se ha renderizado ninguna Imagen. Por favor para algun link</p>
+<p>{{ valor }}</p>
+<!-- <p *ngIf="image=='' || image=='Agrege la url de la imagen que quiera mostrar'; else elseBlock">No se ha renderizado ninguna Imagen. Por favor para algun link</p> -->
+<p *ngIf="src == ''; else elseBlock">
+    No se ha renderizado ninguna Imagen. Por favor para algun link
+</p>
 <ng-template #elseBlock>
-    <img (load)="imgLoaded()" (error)="imgError()" [src]="image" alt="Imagen">
+    <img (load)="imgLoaded()" (error)="imgError()" [src]="src" alt="Imagen" />
 </ng-template>
-<h3>{{counter}}</h3>
+<!-- <h3>{{counter}}</h3> -->
