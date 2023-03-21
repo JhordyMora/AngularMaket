@@ -1,6 +1,6 @@
 export interface product{
     id: String,
     name: String,
-    price: Number,
+    price: number,
     imageUrl: String,
 }

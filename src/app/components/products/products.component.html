@@ -1,4 +1,3 @@
-<p>products works!</p>
 <div class="products-grid">
     <app-product
         [product]="product"
@@ -6,3 +5,8 @@
         (addedProduct)="onAddToShoppingCart($event)"
     ></app-product>
 </div>
+
+<h2>Mi lista de productos</h2>
+<app-product [product]="productos" *ngFor="let productos of myShoppingCart"></app-product>
+<p>Cantidad de productos que he agregado {{myShoppingCart.length}}</p>
+<p>La cantidad a pagar es de {{total.toFixed(2)}} $</p>
