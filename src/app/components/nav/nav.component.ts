@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
+  sideMenuIsActive: Boolean = false;
 
+  toggleSideMenu(){
+    this.sideMenuIsActive = !this.sideMenuIsActive;
+  }
+  
 }
