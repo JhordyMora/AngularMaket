@@ -48,4 +48,8 @@ export class ProductsComponent {
     price: Math.random() * 100,
   };
   products: product[] = [this.product1, this.product2, this.product3,this.product4, this.product5, this.product6];
+  
+  onAddToShoppingCart(product: product){
+    console.log(product);
+  }
 }
