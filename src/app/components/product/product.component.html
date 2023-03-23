@@ -1,5 +1,5 @@
 <img  alt="">
-<app-img [src]="product.imageUrl"></app-img>
-<h2>{{(product.price).toFixed(2)}} $</h2>
-<p>{{product.name}}</p>
+<app-img [src]="product.images[0]"></app-img>
+<h2>{{product.price | currency: 'COP ' }}</h2>
+<p>{{product.title}}</p>
 <button (click)="onAddToCart()">Add Cart</button>

@@ -8,10 +8,14 @@ import { product } from 'src/app/models/product.model';
 })
 export class ProductComponent {
   @Input() product: product = {
-    id: "",
+    id: 0,
     price: 0,
-    name: "",
-    imageUrl:""
+    title: "",
+    images:[""],
+    description: "",
+    creationAt: "",
+    updatedAt: ""
+    // category: ""
   };
 
   @Output() addedProduct = new EventEmitter<product>();
