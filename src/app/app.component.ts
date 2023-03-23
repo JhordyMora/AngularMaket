@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-store-2';
-  title2: String = 'Este es un texto en app component';
-  imageSrc: String = 'Agrege la url de la imagen que quiera mostrar'; //"https://www.w3schools.com/howto/img_avatar.png";
-  showImage: Boolean = true;
+  title2 = 'Este es un texto en app component';
+  imageSrc = 'Agrege la url de la imagen que quiera mostrar'; //"https://www.w3schools.com/howto/img_avatar.png";
+  showImage = true;
 
-  onLoaded(img: String) {
+  onLoaded(img: string) {
     console.log('Log padre', img);
   }
 

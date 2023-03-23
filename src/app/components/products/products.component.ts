@@ -9,7 +9,7 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit{
-  total: number = 0;
+  total = 0;
   myShoppingCart:product[] = [];
   products: product[] = []
   today = new Date();

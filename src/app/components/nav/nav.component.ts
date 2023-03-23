@@ -7,8 +7,8 @@ import { StoreService } from '../../services/store.service'
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit{
-  sideMenuIsActive: Boolean = false;
-  counter: number = 0;
+  sideMenuIsActive = false;
+  counter = 0;
 
   constructor(
     private storeService: StoreService
