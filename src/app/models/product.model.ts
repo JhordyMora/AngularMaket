@@ -3,7 +3,7 @@ export interface Category{
     name: string;
 }
 export interface product{
-    id: number,
+    id: string,
     title: string,
     price: number,
     description: string,

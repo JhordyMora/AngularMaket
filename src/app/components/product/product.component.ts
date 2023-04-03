@@ -8,7 +8,7 @@ import { product } from 'src/app/models/product.model';
 })
 export class ProductComponent {
   @Input() product: product = {
-    id: 0,
+    id: '',
     price: 0,
     title: "",
     images:[""],
@@ -20,8 +20,13 @@ export class ProductComponent {
   };
 
   @Output() addedProduct = new EventEmitter<product>();
+  @Output() showProduct = new EventEmitter<string>();
 
   onAddToCart(){
     this.addedProduct.emit(this.product);
+  }
+
+  onShowDetail(){
+    this.showProduct.emit(this.product.id);
   }
 }
