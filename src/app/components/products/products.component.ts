@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { product } from 'src/app/models/product.model';
+import { ProductDTO, product } from 'src/app/models/product.model';
 import { StoreService } from '../../services/store.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -54,17 +54,29 @@ export class ProductsComponent implements OnInit{
   }
 
   onShowDetail(id: string){
-    
-    // this.toggleProductDetail();
-
-    // if(this.showProductDetail===true){
     this.productService.getProduct(id)
       .subscribe(data => {
         console.log("product", data);
         this.toggleProductDetail();
         this.productChosen = data;
       });
+  }
 
-    // }
+  createNewProduct(){
+    const product: ProductDTO = {
+      title: "nuevo producto",
+      description: "El nuevo producto bla bla bla",
+      images: [
+        "https://st.depositphotos.com/1024122/1332/i/950/depositphotos_13320511-stock-photo-businessman-holding-paper.jpg",
+        "https://st4.depositphotos.com/1000975/40568/i/1600/depositphotos_405689828-stock-photo-businessman-telling-lies-isolated-on.jpg"
+      ],
+      price: 1000,
+      categoryId: 2,
+    }
+    this.productService.create(product)
+      .subscribe(data =>{
+        this.products.unshift(data);
+        console.log("created", data);
+      })
   }
 }

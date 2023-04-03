@@ -10,3 +10,6 @@ export interface product{
     images: string[],
     category: Category;
 }
+export interface ProductDTO extends Omit<product, "id"|"category">{
+    categoryId: number;
+}
