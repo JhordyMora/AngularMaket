@@ -15,6 +15,17 @@ export class ProductsComponent implements OnInit{
   today = new Date();
   date = new Date(2021, 1 ,21);
   showProductDetail = false; 
+  productChosen: product={
+    id: '',
+    price: 0,
+    title: "",
+    images:[""],
+    description: "",
+    category: {
+      id : "",
+      name : "",
+    }, 
+  };
 
   constructor(
     private storeService : StoreService,
@@ -44,14 +55,16 @@ export class ProductsComponent implements OnInit{
 
   onShowDetail(id: string){
     
-    this.toggleProductDetail();
+    // this.toggleProductDetail();
 
-    if(this.showProductDetail===true){
-      this.productService.getProduct(id)
-        .subscribe(data => {
-          console.log("product", data);
-        });
+    // if(this.showProductDetail===true){
+    this.productService.getProduct(id)
+      .subscribe(data => {
+        console.log("product", data);
+        this.toggleProductDetail();
+        this.productChosen = data;
+      });
 
-    }
+    // }
   }
 }
