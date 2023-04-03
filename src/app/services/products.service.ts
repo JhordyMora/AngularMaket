@@ -13,6 +13,6 @@ export class ProductsService {
   }
 
   getAllProducts(){
-    return this.http.get<product[]>('https://api.escuelajs.co/api/v1/products?limit=10&offset=0');
+    return this.http.get<product[]>('https://young-sands-07814.herokuapp.com/api/products/');
   }
 }
