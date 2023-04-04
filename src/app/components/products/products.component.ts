@@ -54,12 +54,17 @@ export class ProductsComponent implements OnInit{
   }
 
   onShowDetail(id: string){
-    this.productService.getProduct(id)
-      .subscribe(data => {
-        console.log("product", data);
-        this.toggleProductDetail();
-        this.productChosen = data;
-      });
+
+    this.toggleProductDetail();
+    if(this.showProductDetail==true){
+
+      this.productService.getProduct(id)
+        .subscribe(data => {
+          console.log("product", data);
+          // this.toggleProductDetail();
+          this.productChosen = data;
+        });
+    }
   }
 
   createNewProduct(){
@@ -85,6 +90,10 @@ export class ProductsComponent implements OnInit{
       title: "nuevo titulo",
     }
     const id = this.productChosen.id;
-    this.productService.update(id, change).subscribe(data => { console.log("updated", data)})
+    this.productService.update(id, change).subscribe(data => { 
+      const productIndex = this.products.findIndex(item => item.id===id);
+      this.products[productIndex] = data;
+      this.productChosen = data;
+    })
   }
 }

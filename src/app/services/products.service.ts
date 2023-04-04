@@ -27,6 +27,6 @@ export class ProductsService {
   }
   
   update(id: string, dto: UpdateDTO){
-    return this.http.patch<product>(`${this.apiUrl}${id}`, dto); 
+    return this.http.put<product>(`${this.apiUrl}${id}`, dto); 
   }
 }
