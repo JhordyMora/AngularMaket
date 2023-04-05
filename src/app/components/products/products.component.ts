@@ -28,6 +28,7 @@ export class ProductsComponent implements OnInit{
   };
   limit = 10;
   offset = 0;
+  statusDetail: 'loading' | 'succes'| 'error' |'init' = 'init';
 
   constructor(
     private storeService : StoreService,
@@ -53,17 +54,41 @@ export class ProductsComponent implements OnInit{
   }
 
   onShowDetail(id: string){
-
+    this.statusDetail = 'loading';
     this.toggleProductDetail();
     if(this.showProductDetail==true){
 
       this.productService.getProduct(id)
-        .subscribe(data => {
-          console.log("product", data);
-          // this.toggleProductDetail();
-          this.productChosen = data;
-        });
+        // .subscribe(data => {
+        //   console.log("product", data);
+        //   // this.toggleProductDetail();
+        //   this.productChosen = data;
+        //   this.statusDetail = 'succes';
+        // }, error =>{
+        //   console.error(error);
+        //   this.statusDetail = 'error';
+        // });  
+        // Funciona pero esta sintaxis está obsoletá
+        .subscribe({
+          next: (v)=> this.showDetailOk(v),
+          error: (e) => this.showDetailError(e),
+          complete: () => console.log("complete"),
+        })
     }
+  }
+
+  showDetailOk(data: product){
+    this.statusDetail = 'succes';
+    console.log("product", data);
+    this.toggleProductDetail();
+    this.productChosen = data;
+  }
+
+  showDetailError(e: Response){
+    this.statusDetail = 'error';
+    window.alert(e);
+    this.toggleProductDetail();
+    console.error(e);
   }
 
   createNewProduct(){
