@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse, HttpStatusCode } from '@angular/common/http'
 import { UpdateDTO, product } from '../models/product.model';
 import { ProductDTO } from '../models/product.model';
-import { catchError, throwError } from 'rxjs';
+import { catchError, map, retry, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +21,16 @@ export class ProductsService {
       params = params.set('limit', limit);
       params = params.set('offset', offset);
     }
-    return this.http.get<product[]>(`${this.apiUrl}`, { params });
+    return this.http.get<product[]>(`${this.apiUrl}`, { params })
+      .pipe(
+        retry(3),
+        map(products => products.map(item=>{
+          return{
+            ...item,
+            taxes: .19 * item.price
+          }
+        }))
+      );
   }
 
   getProduct(id: string){
@@ -48,7 +57,15 @@ export class ProductsService {
   getProductsByPage(limit: number, offset: number){
     return this.http.get<product[]>(`${this.apiUrl}`,{
       params: {limit, offset}
-    });
+    }).pipe(
+        retry(3),
+        map(products => products.map(item=>{
+          return{
+            ...item,
+            taxes: .19 * item.price
+          }
+        }))
+      );
   }
 
   create(productDTO : ProductDTO){
