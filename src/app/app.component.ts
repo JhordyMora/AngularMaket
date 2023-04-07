@@ -12,7 +12,8 @@ export class AppComponent {
   title2 = 'Este es un texto en app component';
   imageSrc = 'Agrege la url de la imagen que quiera mostrar'; //"https://www.w3schools.com/howto/img_avatar.png";
   showImage = true;
-
+  token = '';
+  
   constructor(
     private authService: AuthService,
     private usersService: UsersService,
@@ -41,6 +42,16 @@ export class AppComponent {
       "prueba@mail.com", 
       "prueba"
     ).subscribe({
-      next: (dataRta)=>{console.log(dataRta.access_token)},
-    });}
+      next: (dataRta)=>{
+        this.token = dataRta.access_token;
+        console.log(dataRta.access_token)},
+    });
+  }
+
+  getProfile(){
+    this.authService.profile(this.token)
+      .subscribe(profile => {
+        console.log(profile)
+      });
+  }
 }
