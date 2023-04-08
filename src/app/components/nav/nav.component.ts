@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from '../../services/store.service'
+import { StoreService } from '../../services/store.service';
+import { AuthService } from '../../services/auth.service';
+import { UsersService } from '../../services/users.service';
+import { User} from '../../models/user.model'
 
 @Component({
   selector: 'app-nav',
@@ -9,9 +12,12 @@ import { StoreService } from '../../services/store.service'
 export class NavComponent implements OnInit{
   sideMenuIsActive = false;
   counter = 0;
+  token = '';
+  profile: User | null = null;
 
   constructor(
-    private storeService: StoreService
+    private storeService: StoreService,
+    private authService : AuthService, 
   ){ }
 
   toggleSideMenu(){
@@ -22,4 +28,25 @@ export class NavComponent implements OnInit{
     this.storeService.myCart$.subscribe(products => this.counter = products.length);
   }
 
+  login(){
+    this.authService.login(
+      "prueba@mail.com", 
+      "prueba"
+    ).subscribe({
+      next: (dataRta)=>{
+        this.token = dataRta.access_token;
+        this.getProfile(),
+        console.log(dataRta.access_token)
+      },
+    });
+  }
+
+  getProfile(){
+    this.authService.profile(this.token)
+      .subscribe(user => {
+        console.log(user);
+        this.profile = user;
+      });
+  }
+  
 }

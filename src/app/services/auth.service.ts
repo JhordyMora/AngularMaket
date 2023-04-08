@@ -19,14 +19,16 @@ export class AuthService {
   }
 
   profile(token: string ){
-    let headers = new HttpHeaders();
-    headers = headers.set(
-        'Authorization', `Bearer ${token}`
-    );
+    // let headers = new HttpHeaders();
+    // headers = headers.set(
+    //     'Authorization', `Bearer ${token}`
+    // );
+    console.log("inside profile method");
     return this.http.get<User>(`${this.apiUrl}/profile`,{
-      headers//: {
-        // Authorization: `Bearer ${token}`
-      // }
+        // headers
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       }
     )
   }
