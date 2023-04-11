@@ -12,7 +12,6 @@ import { User} from '../../models/user.model'
 export class NavComponent implements OnInit{
   sideMenuIsActive = false;
   counter = 0;
-  token = '';
   profile: User | null = null;
 
   constructor(
@@ -34,7 +33,6 @@ export class NavComponent implements OnInit{
       "prueba"
     ).subscribe({
       next: (dataRta)=>{
-        this.token = dataRta.access_token;
         this.getProfile(),
         console.log(dataRta.access_token)
       },
@@ -42,7 +40,7 @@ export class NavComponent implements OnInit{
   }
 
   getProfile(){
-    this.authService.profile(this.token)
+    this.authService.profile()
       .subscribe(user => {
         console.log(user);
         this.profile = user;
