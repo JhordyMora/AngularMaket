@@ -80,7 +80,7 @@ export class ProductsComponent implements OnInit{
   showDetailOk(data: product){
     this.statusDetail = 'succes';
     console.log("product", data);
-    this.toggleProductDetail();
+    // this.toggleProductDetail();
     this.productChosen = data;
   }
 

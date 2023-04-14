@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpErrorResponse, HttpStatusCode } from '@angu
 import { UpdateDTO, product } from '../models/product.model';
 import { ProductDTO } from '../models/product.model';
 import { catchError, map, retry, throwError } from 'rxjs';
+import { checkTime } from './../interceptors/time.interceptor'
 @Injectable({
   providedIn: 'root'
 })
@@ -34,7 +35,7 @@ export class ProductsService {
   }
 
   getProduct(id: string){
-    return this.http.get<product>(`${this.apiUrl}/${id}`)
+    return this.http.get<product>(`${this.apiUrl}/${id}`,{ context: checkTime()})
       .pipe(
           catchError((error: HttpErrorResponse)=>{
             // if(error.status===500){
