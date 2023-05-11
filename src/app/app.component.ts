@@ -12,6 +12,7 @@ export class AppComponent {
   title2 = 'Este es un texto en app component';
   imageSrc = 'Agrege la url de la imagen que quiera mostrar'; //"https://www.w3schools.com/howto/img_avatar.png";
   showImage = true;
+  imgRta = '';
   
   constructor(
     private filesService: FilesService,
@@ -41,5 +42,16 @@ export class AppComponent {
       .subscribe();
   }
 
-
+  onUpload(event: Event){
+    const element = event.target as HTMLInputElement;
+    const file = element.files?.item(0);
+    if(file){
+      this.filesService.uploadFile(file).
+      subscribe(
+        rta=>{
+          this.imgRta = rta.location;
+        }
+      )
+    }
+  }  
 }
